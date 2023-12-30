@@ -21,7 +21,7 @@ def whois(domain):
         print("Initiating whois module...")
         driver.find_element("id", 'bigSearchBox').clear()
         driver.find_element("id", 'bigSearchBox').send_keys(domain, Keys.ENTER)
-        sleep(6)
+        sleep(8)
         if "I'm not a Robot" in driver.find_element("xpath", "//button[@data-callback='verifyRecaptcha']").text:
             driver.find_element("xpath", "//button[@data-callback='verifyRecaptcha']").click()
             capture_screenshot(driver,f"whois-{str(domain)}.png")
@@ -37,7 +37,7 @@ def headers(domain):
         print("Initiating headers inspection module...")
         driver.find_element("id", 'q').clear()
         driver.find_element("id", 'q').send_keys(domain, Keys.ENTER)
-        sleep(5)
+        sleep(8)
         capture_screenshot(driver,f'proxy-technologies-{str(domain)}.png')
         print("[+] Headers inspection done\n")
     except Exception as e:
