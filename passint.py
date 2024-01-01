@@ -257,7 +257,6 @@ if __name__ == "__main__":
     try:
         os.makedirs("./Output/", exist_ok=True)
         os.makedirs("./Reports/", exist_ok=True)
-        delete_old_elements()
         directory = 'Output'
         parser = argparse.ArgumentParser(description='Python script for passive and non-intrusive reconnaissance. The goal is to minimize active interactions with the target and eventually generate a report.')
         parser.add_argument('-d', '--domain', type=str, help='Domain name')
@@ -276,7 +275,7 @@ if __name__ == "__main__":
         parser.add_argument('-p', '--proxy', action='store_true', help='Enable website proxy to handle a few captcha checks; this feature is available only for the subdomains and technologies modules, it may be slow')
         parser.epilog = ('This script uses the free plan on several sites, so it is not possible to collect all the data. We recommend further manual research.')
         args = parser.parse_args()
-
+        
         service = Service('./firefox_custom_settings/firefox_driver/geckodriver')
         options = webdriver.FirefoxOptions()
         options.add_argument('--disable-blink-features=AutomationControlled')
@@ -285,7 +284,8 @@ if __name__ == "__main__":
         driver = webdriver.Firefox(options=options, service=service)
         driver.maximize_window()
         driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-
+        delete_old_elements()
+        
         if args.clear:
             delete_reports()
         
