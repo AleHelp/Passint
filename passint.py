@@ -261,7 +261,7 @@ if __name__ == "__main__":
         directory = 'Output'
         parser = argparse.ArgumentParser(description='Python script for passive and non-intrusive reconnaissance. The goal is to minimize active interactions with the target and eventually generate a report.')
         parser.add_argument('-d', '--domain', type=str, help='Domain name')
-        parser.add_argument('--clear', action='store_true', help='Clear the Reports folder')
+        parser.add_argument('--clear', action='store_true', help='Clear the Reports and Output folder')
         parser.add_argument('-P', '--profile', type=str, default="./firefox_custom_settings/6rmhsi0z.Custom-Profile", help='Specify a custom Firefox profile to import by providing the path. Example: --profile <path>')
         parser.add_argument('-a', '--all', action='store_true', help='Run all modules')
         parser.add_argument('-w', '--whois', action='store_true', help='Check whois and its historical records')
