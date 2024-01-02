@@ -35,7 +35,7 @@ _When you're done, to turn off the virtual environment, just type the command `d
 -h, --help            show this help message and exit
 -d DOMAIN, --domain DOMAIN
                       Domain name
---clear               Clear the Reports folder
+--clear               Clear the Reports and Output folder
 -P PROFILE, --profile PROFILE
                       Specify a custom Firefox profile to import by providing the path. Example: --profile <path>
 -a, --all             Run all modules
