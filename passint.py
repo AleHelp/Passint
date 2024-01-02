@@ -3,6 +3,7 @@
 from time import sleep
 import argparse
 import os
+import sys
 from selenium import webdriver
 from scripts.generatereport import *
 from selenium.webdriver.common.by import By
@@ -275,6 +276,11 @@ if __name__ == "__main__":
         parser.add_argument('-p', '--proxy', action='store_true', help='Enable website proxy to handle a few captcha checks; this feature is available only for the subdomains and technologies modules, it may be slow')
         parser.epilog = ('This script uses the free plan on several sites, so it is not possible to collect all the data. We recommend further manual research.')
         args = parser.parse_args()
+
+        if len(sys.argv) == 1:
+            parser.print_help()
+            driver.quit()
+            exit(0)
         
         service = Service('./firefox_custom_settings/firefox_driver/geckodriver')
         options = webdriver.FirefoxOptions()
@@ -284,9 +290,9 @@ if __name__ == "__main__":
         driver = webdriver.Firefox(options=options, service=service)
         driver.maximize_window()
         driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-        delete_old_elements()
         
         if args.clear:
+            delete_old_elements()
             delete_reports()
         
         if not args.domain:
