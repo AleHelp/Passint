@@ -279,7 +279,6 @@ if __name__ == "__main__":
 
         if len(sys.argv) == 1:
             parser.print_help()
-            driver.quit()
             exit(0)
         
         service = Service('./firefox_custom_settings/firefox_driver/geckodriver')
