@@ -31,7 +31,7 @@ pip3 install -r requirements.txt
 _When you're done, to turn off the virtual environment, just type the command `deactivate`_
 
 ## Usage:
-```bash
+```
 -h, --help            show this help message and exit
 -d DOMAIN, --domain DOMAIN
                       Domain name
