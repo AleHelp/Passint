@@ -6,6 +6,7 @@ import os
 import sys
 from selenium import webdriver
 from scripts.generatereport import *
+from scripts.cleaner import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.service import Service
@@ -261,7 +262,8 @@ if __name__ == "__main__":
         directory = 'Output'
         parser = argparse.ArgumentParser(description='Python script for passive and non-intrusive reconnaissance. The goal is to minimize active interactions with the target and eventually generate a report.')
         parser.add_argument('-d', '--domain', type=str, help='Domain name')
-        parser.add_argument('--clear', action='store_true', help='Clear the Reports and Output folder')
+        parser.add_argument('--clear', action='store_true', help='Clear the Reports folder')
+        parser.add_argument('--headless', action='store_true', help='Active the headless mode does not display Firefox GUI')
         parser.add_argument('-P', '--profile', type=str, default="./firefox_custom_settings/6rmhsi0z.Custom-Profile", help='Specify a custom Firefox profile to import by providing the path. Example: --profile <path>')
         parser.add_argument('-a', '--all', action='store_true', help='Run all modules')
         parser.add_argument('-w', '--whois', action='store_true', help='Check whois and its historical records')
@@ -280,18 +282,24 @@ if __name__ == "__main__":
         if len(sys.argv) == 1:
             parser.print_help()
             exit(0)
-        
+
         service = Service('./firefox_custom_settings/firefox_driver/geckodriver')
         options = webdriver.FirefoxOptions()
+
+        if args.headless:
+            options.add_argument(f"--headless")
+            print("[*] Headless mode activated, feel free to do other stuff while the script is running\n")
+
         options.add_argument('--disable-blink-features=AutomationControlled')
         options.add_argument(f"--profile")
-        options.add_argument(f"./firefox_custom_settings/6rmhsi0z.Custom-Profile")
+        options.add_argument(f"{args.profile}")
         driver = webdriver.Firefox(options=options, service=service)
         driver.maximize_window()
         driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         
+        delete_old_elements()
+
         if args.clear:
-            delete_old_elements()
             delete_reports()
         
         if not args.domain:
