@@ -6,7 +6,7 @@ _Passint is a simple Python script that extensively employs the Selenium library
 ## Organization:
 `passint.py` _Main script_
 
-`Scripts` _Folder for other scripts such as generatereport.py_
+`Scripts` _Folder for other scripts such as generatereport.py and cleaner.py_
 
 `firefox_custom_settings` _Folder with geckodriver (Firefox driver) and a predefined custom Firefox profile with some add-ons (AdBlock and Random User-Agent)_
 
@@ -35,7 +35,8 @@ _When you're done, to turn off the virtual environment, just type the command `d
 -h, --help            show this help message and exit
 -d DOMAIN, --domain DOMAIN
                       Domain name
---clear               Clear the Reports and Output folder
+--clear               Clear the Reports folder
+--headless            Active the headless mode does not display Firefox GUI
 -P PROFILE, --profile PROFILE
                       Specify a custom Firefox profile to import by providing the path. Example: --profile <path>
 -a, --all             Run all modules
@@ -96,7 +97,7 @@ _Finally, you can add it with the following command:_
 ```bash
 python3 passint.py -d <domain name> -craw -P
 ```
-
+III. _The script whether with gui or without (headless mode) quietly allows you to be able to do other things_
 ## Disclaimer:
 __The script utilizes Selenium with extensive interaction with the HTML code of the target websites. However, it is important to note that changes in the HTML structure of these websites may occur.__
 
