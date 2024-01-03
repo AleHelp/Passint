@@ -6,26 +6,6 @@ from fpdf import FPDF
 from PyPDF2 import PdfMerger
 import os
 
-def delete_old_elements():
-    if not any(os.listdir('./Output/')):
-        print("[*] The /Output folder is already empty.")
-        return
-
-    for filename in os.listdir('./Output/'):
-        file_path = os.path.join('./Output/', filename)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-
-def delete_reports():
-    if not any(os.listdir('./Reports/')):
-        print("[*] The /Reports folder is already empty.\n")
-        return
-
-    for filename in os.listdir('./Reports/'):
-        file_path = os.path.join('./Reports/', filename)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-
 def png_to_pdf(domain):
     files = glob(os.path.join("./Output/", "*.png"))
     iml = []
@@ -49,7 +29,7 @@ def txt_to_pdf(domain):
     for file in files:
         with open(file, "r", encoding="utf-8") as f:
             for x in f:
-                pdf.cell(200, 4, txt=x, ln=1, align='L')
+                pdf.multi_cell(0, 5, txt=x, align='L')
     pdf.output(f"./Reports/report-text-{domain}.pdf")
 
 def merge(domain):
