@@ -86,7 +86,7 @@ def subdomains(domain):
         driver.find_element("id", 'regularInput').send_keys(domain)
         sleep(1)
         driver.find_element("xpath", '//button[@class="btn btn-default"]').click()
-        sleep(12)
+        sleep(20)
         capture_screenshot(driver,f"subdomains-{str(domain)}.png")
         print("[+] Subdomains done\n")
     except Exception as e:
